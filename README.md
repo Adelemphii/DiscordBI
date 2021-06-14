@@ -1,3 +1,0 @@
-# DiscordBI
-
-Yep

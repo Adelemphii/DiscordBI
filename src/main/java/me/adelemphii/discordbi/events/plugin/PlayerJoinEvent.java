@@ -19,8 +19,6 @@ public class PlayerJoinEvent implements Listener {
             return;
         }
 
-        if(plugin.getConfig().getList("player-bypass").isEmpty()) return;
-
         if(!plugin.getConfig().getList("player-bypass").contains(event.getUniqueId().toString())) {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage(ChatColor.RED + "Playtime is not enabled! The playable times are: \n" +

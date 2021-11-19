@@ -1,0 +1,4 @@
+name: DiscordBI-Rework
+version: '${project.version}'
+main: me.adelemphii.discordbirework.DiscordBIRework
+api-version: 1.17

@@ -29,11 +29,13 @@ public class DiscordBot {
 
         plugin.getLogger().info("Registering Listeners...");
         registerListeners(jda);
+        registerSlashCommands(jda);
+        jda.updateCommands().queue();
 
         plugin.getLogger().info("You can invite the bot using: "
                 + jda.getInviteUrl(Permission.MESSAGE_MANAGE, Permission.MESSAGE_READ, Permission.MESSAGE_WRITE,
                 Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ADD_REACTION, Permission.MANAGE_ROLES,
-                Permission.MESSAGE_HISTORY));
+                Permission.MESSAGE_HISTORY, Permission.USE_SLASH_COMMANDS, Permission.MANAGE_WEBHOOKS));
     }
 
     public JDA getJDA() {
@@ -70,10 +72,20 @@ public class DiscordBot {
         jda.addEventListener(new HelpCommand(plugin));
         jda.addEventListener(new OnlineCommand(plugin));
         jda.addEventListener(new StatsCommand(plugin));
-        jda.addEventListener(new WhitelistCommands(plugin));
         jda.addEventListener(new StatusCommand(plugin));
 
         jda.addEventListener(new VouchListener());
+    }
+
+    private void registerSlashCommands(JDA jda) {
+        jda.upsertCommand("help", "Displays the help menu!").queue();
+        jda.upsertCommand("online", "Displays what players logged in to the server!").queue();
+        /*jda.upsertCommand("stats", "Displays the stats of a player who plays on the server!")
+                .addOption(OptionType.STRING, "player", "The player to get the stats of!", true)
+                .addOption(OptionType.STRING, "statistic", "The statistic to get!", true)
+                .queue();*/
+        jda.upsertCommand("status", "Displays the status of the server!").queue();
+        jda.upsertCommand("credits", "Displays the credits for the bot!").queue();
     }
 
 }
